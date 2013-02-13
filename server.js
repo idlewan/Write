@@ -190,6 +190,8 @@ app.get('/auth/twitter/callback', function(req, res, next) {
             redis.sadd('user:id', id);
             redis.hset('user:'+id, 'username', results.screen_name);
             redis.hset('user:'+id, 'service_user_id', results.user_id);
+            // username index
+            redis.set('user:username:'+results.screen_name+':id', id);
 
             // Set global vars for templates
             app.locals.username = results.screen_name;
