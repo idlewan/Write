@@ -179,25 +179,38 @@ app.get('/auth/twitter/callback', function(req, res, next) {
           // console.log(results, req.session.oauth);
 
           // Save in DB
-          redis.incr('user_id');
-          redis.get('user_id', function(err, reply) {
-            if (err || !reply) {
-              console.log(err, reply);
-              return;
+          redis.get('user:username:'+results.screen_name+':id', function(err, reply) {
+
+            if (!reply) {
+              // User doesn't exists - Add New User
+              redis.incr('user_id');
+              redis.get('user_id', function(err, reply) {
+                if (err || !reply) {
+                  console.log(err, reply);
+                  return;
+                }
+
+                var id = parseInt(reply);
+                redis.sadd('user:id', id);
+                redis.hset('user:'+id, 'username', results.screen_name);
+                redis.hset('user:'+id, 'service_user_id', results.user_id);
+                // username index
+                redis.set('user:username:'+results.screen_name+':id', id);
+
+                // Set global vars for templates
+                app.locals.username = results.screen_name;
+
+                res.redirect('/');
+              });
+            }
+            else {
+              // User exists
+              app.locals.username = results.screen_name;
+              res.redirect('/');
             }
 
-            var id = parseInt(reply);
-            redis.sadd('user:id', id);
-            redis.hset('user:'+id, 'username', results.screen_name);
-            redis.hset('user:'+id, 'service_user_id', results.user_id);
-            // username index
-            redis.set('user:username:'+results.screen_name+':id', id);
-
-            // Set global vars for templates
-            app.locals.username = results.screen_name;
-
-            res.redirect('/');
           });
+
         }
 
         return;
