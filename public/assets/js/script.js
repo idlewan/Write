@@ -273,10 +273,11 @@ function init() {
 
 keyz.key_bindings['ctrl+s'] = function() {
 	var content = $('#text').val()
-		, url = '/writeup';
+		, url = '/write/save';
 
 	if (window.key) {
-		url += '/'+window.key;
+		// Update
+		url += '/write/update';
 	}
 
 	$.post(
@@ -284,7 +285,7 @@ keyz.key_bindings['ctrl+s'] = function() {
 		{content: content},
 		function(data) {
 			if (data.key) {
-				location.href = '/'+data.key;
+				location.href = '/w/'+data.key;
 			}
 		},
 		'json'
