@@ -47,6 +47,11 @@ var generateId = function() {
   });
 };
 
+// -----
+// Globals
+// -----
+app.locals.username = 'Guest';
+
 
 // =====
 // Routes
@@ -127,7 +132,7 @@ var OAuth = require('oauth').OAuth
       "https://api.twitter.com/oauth/access_token",
       config.twitter_consumer_key,
       config.twitter_consumer_secret,
-      "1.1",
+      "1.1A",
       "http://localhost:8080/auth/twitter/callback",
       "HMAC-SHA1"
     );
@@ -137,14 +142,14 @@ app.get('/auth/twitter', function(req, res) {
   oauth.getOAuthRequestToken(function(error, oauth_token, oauth_token_secret, results) {
     if (error) {
       console.log(error);
-      res.send("Authentication Failed!")
+      res.send("Authentication Failed!");
     }
     else {
-      req.session.oauth = {};
-      req.session.oauth.token = oauth_token;
-      console.log('oauth.token: ' + req.session.oauth.token);
-      req.session.oauth.token_secret = oauth_token_secret;
-      console.log('oauth.token_secret: ' + req.session.oauth.token_secret);
+      req.session.oauth = {
+        token: oauth_token,
+        token_secret: oauth_token_secret
+      };
+      // console.log(req.session.oauth);
       res.redirect('https://twitter.com/oauth/authenticate?oauth_token='+oauth_token)
     }
   });
@@ -155,29 +160,50 @@ app.get('/auth/twitter/callback', function(req, res, next) {
 
   if (req.session.oauth) {
     req.session.oauth.verifier = req.query.oauth_verifier;
-    var session_oauth = req.session.oauth;
+    var oauth_data = req.session.oauth;
 
     oauth.getOAuthAccessToken(
-      session_oauth.token,
-      session_oauth.token_secret,
-      session_oauth.verifier,
+      oauth_data.token,
+      oauth_data.token_secret,
+      oauth_data.verifier,
       function(error, oauth_access_token, oauth_access_token_secret, results) {
+
         if (error) {
           console.log(error);
-          res.send("yeah something broke.");
+          res.send("Authentication Failure!");
         }
         else {
           req.session.oauth.access_token = oauth_access_token;
           req.session.oauth.access_token_secret = oauth_access_token_secret;
-          console.log(results);
-          res.send("worked. nice one.");
-          res.redirect('/');
+          req.session.username = results.screen_name;
+          // console.log(results, req.session.oauth);
+
+          // Save in DB
+          redis.incr('user_id');
+          redis.get('user_id', function(err, reply) {
+            if (err || !reply) {
+              console.log(err, reply);
+              return;
+            }
+
+            var id = parseInt(reply);
+            redis.sadd('user:id', id);
+            redis.hset('user:'+id, 'username', results.screen_name);
+            redis.hset('user:'+id, 'service_user_id', results.user_id);
+
+            // Set global vars for templates
+            app.locals.username = results.screen_name;
+
+            res.redirect('/');
+          });
         }
+
+        return;
       }
     );
   }
   else {
-    next(new Error("you're not supposed to be here."));
+    res.redirect('/login'); // Redirect to login page
   }
 
 });

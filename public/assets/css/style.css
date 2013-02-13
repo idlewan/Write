@@ -11,18 +11,37 @@ body, html {
 	height: 100%;
 	width: 100%;
 	max-width: 100%;
-	background: #ccc;
 	overflow: hidden;
 
 	font: normal 12px/18px "Courier New", Consolas, mono;
 }
 
+body.dark {
+	background: #222;
+	color: white;
+}
+
+body.light {
+	background: #222;
+	color: white;
+}
+
+/*
+Write Area
+----------
+*/
+
+#write {
+	max-width: 800px;
+	height: 100%;
+	margin: 0 auto;
+}
+
 #text {
 	height: 100%;
 	width: 100%;
-	background: #222;
-	max-width: 100%;
-	padding: 50px 50px 50px 100px;
+	background: #111;
+	padding: 50px;
 	font: 20px/29px "Courier New", monospace;
 	border: 0;
 	outline: 0;
@@ -33,6 +52,23 @@ body, html {
 	-ms-transition: all .5s ease;
 	-o-transition: all .5s ease;
 	transition: all .5s ease;
+}
+
+/*
+Profile
+-------
+*/
+
+#profile {
+	position: absolute;
+	right: 10px; top: 10px;
+}
+
+#profile img {
+	opacity: 0.5;
+}
+#profile img:hover {
+	opacity: 1;
 }
 
 ::-webkit-scrollbar {
