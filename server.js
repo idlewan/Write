@@ -84,8 +84,6 @@ app.get('/w/:key', function(req, res) {
     var data = {key: key, content: reply};
     res.render('home', data);
   });
-
-  // console.log(key);
 });
 
 // Save Writeup
@@ -100,7 +98,7 @@ app.post('/write/save', function(req, res) {
   var key = generateId();
   var content = req.body.content
     , created_at = Date.now()
-    , created_by = (req.session.username) ? req.session.username : 'guest';
+    , created_by = app.locals.username;
 
   redis.sadd('writeup:key', key);
   redis.hset('writeup:'+key, 'content', content);
@@ -113,15 +111,45 @@ app.post('/write/save', function(req, res) {
 // Update Writeup
 
 app.post('/write/update', function(req, res) {
-  var key = req.params.key;
+  var key = req.body.key;
   var content = req.body.content
-    , modified_at = Date.now();
+    , modified_at = Date.now()
+    , curr_user = app.locals.username
+    , created_by;
 
-  // redis.sadd('writeup:key', key);
+  /*
+  // Create a new key if the current user is different than the author
+  // For some reason, the condition (curr_user == created_by) is always false
+
+  redis.hget('writeup:'+key, 'created_by', function(err, reply) {
+    created_by = reply;
+  });
+
+  if(created_by == curr_user) {
+    // redis.sadd('writeup:key', key);
+    redis.hset('writeup:'+key, 'content', content);
+    redis.hset('writeup:'+key, 'modified_at', modified_at);
+
+    res.json({status: 'success'});
+  } 
+
+  else {
+    key = generateId();
+
+    redis.sadd('writeup:key', key);
+    redis.hset('writeup:'+key, 'content', content);
+    redis.hset('writeup:'+key, 'created_at', modified_at);
+    redis.hset('writeup:'+key, 'created_by', curr_user);
+
+    res.json({key: key});
+  }
+  */
+
   redis.hset('writeup:'+key, 'content', content);
   redis.hset('writeup:'+key, 'modified_at', modified_at);
 
   res.json({status: 'success'});
+
 });
 
 // -----

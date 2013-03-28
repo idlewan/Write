@@ -305,12 +305,14 @@ keyz.key_bindings['ctrl+s', 'meta+s'] = function() {
 
 	if (window.key) {
 		// Update
-		url += '/write/update';
+		key = window.key;
+		url = '/write/update';
+		// console.log(window.key);
 	}
 
 	$.post(
 		url,
-		{content: content},
+		{content: content, "key": key},
 		function(data) {
 			if (data.key) {
 				location.href = '/w/'+data.key;
