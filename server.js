@@ -127,6 +127,7 @@ app.post('/write/update', function(req, res) {
 
     if(created_by == curr_user) {
       console.log("Same Users");
+
       // redis.sadd('writeup:key', key);
       redis.hset('writeup:'+key, 'content', content);
       redis.hset('writeup:'+key, 'modified_at', modified_at);
@@ -136,6 +137,7 @@ app.post('/write/update', function(req, res) {
 
     else {
       console.log("Different Users");
+      
       key = generateId();
 
       redis.sadd('writeup:key', key);

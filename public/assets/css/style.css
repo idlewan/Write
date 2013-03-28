@@ -56,6 +56,26 @@ Write Area
 }
 
 /*
+Notifications
+-------
+*/
+
+p.notify {
+	position: absolute;
+	top: 25px;
+	right: 60px;
+	display: none;
+}
+
+p.notify.success {
+	color: green;
+}
+
+p.notify.failure {
+	color: red;
+}
+
+/*
 Profile
 -------
 */

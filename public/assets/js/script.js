@@ -299,6 +299,15 @@ function init() {
 
 }
 
+function notify(text, status) {
+	var ele = $(".notify");
+
+	ele.text(text);
+	ele.addClass((status == 'success') ? 'success' : 'failure');
+
+	ele.fadeIn(400).delay(2000).fadeOut(400);
+}
+
 keyz.key_bindings['ctrl+s', 'meta+s'] = function() {
 	var content = $('#text').val()
 		, url = '/write/save';
@@ -317,9 +326,12 @@ keyz.key_bindings['ctrl+s', 'meta+s'] = function() {
 			if (data.key) {
 				location.href = '/w/'+data.key;
 			}
+			notify('Updated successfully.', 'success');
 		},
 		'json'
-	);
+	).fail(function() {
+		notify('An error occured while updating.', 'failure');
+	});
 
 	return false;
 };
