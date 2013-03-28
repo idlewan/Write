@@ -85,7 +85,7 @@ app.get('/w/:key', function(req, res) {
     res.render('home', data);
   });
 
-  console.log(key);
+  // console.log(key);
 });
 
 // Save Writeup

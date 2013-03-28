@@ -7,7 +7,7 @@ html(lang="en")
     title Distraction Free Writing
 
     meta(name="title", content="Distraction Free Writing")
-    meta(name="description", content="I created this small application for you, if you like to write.")
+    meta(name="description", content="We created this small application for you, if you like to write without distractions.")
 
     link(rel="stylesheet", href="/css/style.css")
     link(rel="stylesheet", href="/css/typography.css")
@@ -55,7 +55,13 @@ html(lang="en")
 
         br
 
-        Fullscreen may not work sometimes.
+        a#thmBtn(href="javascript:void(0);") theme
+        |  : 
+        span#thmVal dark
+
+        br
+
+        | Fullscreen might not work sometimes.
     
       p
         | There are around 
@@ -76,8 +82,7 @@ html(lang="en")
     // User Info
     section#profile
       a(href="javascript:void(0);")
-        img(src="https://api.twitter.com/1/users/profile_image/#{username}", "width=40")
-
+        img(src="https://api.twitter.com/1/users/profile_image/#{username}", width="30")
 
     // Heart
     section#write

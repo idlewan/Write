@@ -11,8 +11,10 @@ function init() {
 		settings = {
 			soundBtn: document.getElementById("muteBtn"),
 			fullBtn: document.getElementById("fsBtn"),
+			thmBtn: document.getElementById("thmBtn"),
 			sound: "yes",
-			full: "no"
+			full: "no",
+			theme: "dark"
 		};
 
 	/*
@@ -52,6 +54,14 @@ function init() {
 		if(localStorage.getItem("sound") == "no") {
 			settings.sound = "no";
 			document.getElementById("muteVal").innerHTML = "no";	
+		}
+
+		if(localStorage.getItem("theme") == "light") {
+			settings.theme = "light";
+			document.getElementById("thmVal").innerHTML = "light";	
+
+			$("body").removeClass("dark");
+			$("body").addClass("light");
 		}
 	} catch(e) {}
 
@@ -180,6 +190,30 @@ function init() {
 
 			requestFullScreen(document.body);
 			document.body.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);		
+		}
+		
+		e.preventDefault();
+	}, false);
+
+	settings.thmBtn.addEventListener("click", function(e) {
+		if(settings.theme == "dark") {
+			settings.theme = "light"
+			document.getElementById("thmVal").innerHTML = "light";
+
+			$("body").removeClass("dark");
+			$("body").addClass("light");
+
+			localStorage.setItem("theme", "light");
+		}
+
+		else {
+			settings.theme = "dark"
+			document.getElementById("thmVal").innerHTML = "dark";
+
+			$("body").removeClass("light");
+			$("body").addClass("dark");
+			
+			localStorage.setItem("theme", "dark");
 		}
 		
 		e.preventDefault();

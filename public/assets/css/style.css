@@ -17,13 +17,21 @@ body, html {
 }
 
 body.dark {
-	background: #444;
-	color: #ddd;
+	background: #151515;
+	color: #ccc;
 }
 
 body.light {
 	background: #ddd;
 	color: #444;
+}
+
+body {
+	-webkit-transition: all .2s ease;
+	-moz-transition: all .2s ease;
+	-ms-transition: all .2s ease;
+	-o-transition: all .2s ease;
+	transition: all .2s ease;
 }
 
 /*
@@ -40,18 +48,18 @@ Write Area
 #text {
 	height: 100%;
 	width: 100%;
-	background: #111;
 	padding: 50px;
+	background: transparent;
 	font: 20px/29px "Courier New", monospace;
 	border: 0;
 	outline: 0;
-	color: #ccc;
+	color: inherit;
 	resize: none;
-	-webkit-transition: all .5s ease;
-	-moz-transition: all .5s ease;
-	-ms-transition: all .5s ease;
-	-o-transition: all .5s ease;
-	transition: all .5s ease;
+	-webkit-transition: all .2s ease;
+	-moz-transition: all .2s ease;
+	-ms-transition: all .2s ease;
+	-o-transition: all .2s ease;
+	transition: all .2s ease;
 }
 
 /*
@@ -66,21 +74,10 @@ Profile
 
 #profile img {
 	opacity: 0.5;
+	border-radius: 3px;
 }
 #profile img:hover {
 	opacity: 1;
-}
-
-::-webkit-scrollbar {
-    width: 5px;
-}
- 
-::-webkit-scrollbar-track {
-    height: 100%;
-}
- 
-::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1); 
 }
 
 /* Text Styles */
@@ -97,11 +94,11 @@ Profile
 	opacity: 0;
 	visibility: hidden;
 	z-index: 10;
-	-webkit-transition: all .5s ease;
-	-moz-transition: all .5s ease;
-	-ms-transition: all .5s ease;
-	-o-transition: all .5s ease;
-	transition: all .5s ease;
+	-webkit-transition: all 0.2s ease;
+	-moz-transition: all 0.2s ease;
+	-ms-transition: all 0.2s ease;
+	-o-transition: all 0.2s ease;
+	transition: all 0.2s ease;
 }
 
 #about {
@@ -111,11 +108,11 @@ Profile
 	position: absolute;
 	left: -350px;
 	top: 0;
-	-webkit-transition: all .5s ease;
-	-moz-transition: all .5s ease;
-	-ms-transition: all .5s ease;
-	-o-transition: all .5s ease;
-	transition: all .5s ease;
+	-webkit-transition: all .2s ease;
+	-moz-transition: all .2s ease;
+	-ms-transition: all .2s ease;
+	-o-transition: all .2s ease;
+	transition: all .2s ease;
 
 	box-shadow: inset -2px 0 20px rgba(0, 0, 0, 1);
 	overflow: auto;
@@ -142,11 +139,11 @@ Profile
 	height: 36px;
 	z-index: 5;
 	cursor: pointer;
-	-webkit-transition: all .5s ease;
-	-moz-transition: all .5s ease;
-	-ms-transition: all .5s ease;
-	-o-transition: all .5s ease;
-	transition: all .5s ease;
+	-webkit-transition: all .2s ease;
+	-moz-transition: all .2s ease;
+	-ms-transition: all .2s ease;
+	-o-transition: all .2s ease;
+	transition: all .2s ease;
 }
 
 .toggle:before {
