@@ -17,6 +17,8 @@ app.locals.pretty = true;
 app.use(express.bodyParser());
 // Parse Cookie Data
 app.use(express.cookieParser());
+// Logger
+app.use(express.logger('dev'));
 
 // Launch Main App
 var port = process.env.PORT || 8080;
@@ -84,6 +86,8 @@ app.get('/w/:key', function(req, res) {
     var data = {key: key, content: reply};
     res.render('home', data);
   });
+
+  //console.log(key);
 });
 
 // Save Writeup
@@ -117,39 +121,32 @@ app.post('/write/update', function(req, res) {
     , curr_user = app.locals.username
     , created_by;
 
-  /*
   // Create a new key if the current user is different than the author
-  // For some reason, the condition (curr_user == created_by) is always false
-
   redis.hget('writeup:'+key, 'created_by', function(err, reply) {
     created_by = reply;
+
+    if(created_by == curr_user) {
+      console.log("Same Users");
+      // redis.sadd('writeup:key', key);
+      redis.hset('writeup:'+key, 'content', content);
+      redis.hset('writeup:'+key, 'modified_at', modified_at);
+
+      res.json({status: 'success'});
+    } 
+
+    else {
+      console.log("Different Users");
+      key = generateId();
+
+      redis.sadd('writeup:key', key);
+      redis.hset('writeup:'+key, 'content', content);
+      redis.hset('writeup:'+key, 'created_at', modified_at);
+      redis.hset('writeup:'+key, 'created_by', curr_user);
+
+      res.json({key: key});
+    }
   });
-
-  if(created_by == curr_user) {
-    // redis.sadd('writeup:key', key);
-    redis.hset('writeup:'+key, 'content', content);
-    redis.hset('writeup:'+key, 'modified_at', modified_at);
-
-    res.json({status: 'success'});
-  } 
-
-  else {
-    key = generateId();
-
-    redis.sadd('writeup:key', key);
-    redis.hset('writeup:'+key, 'content', content);
-    redis.hset('writeup:'+key, 'created_at', modified_at);
-    redis.hset('writeup:'+key, 'created_by', curr_user);
-
-    res.json({key: key});
-  }
-  */
-
-  redis.hset('writeup:'+key, 'content', content);
-  redis.hset('writeup:'+key, 'modified_at', modified_at);
-
-  res.json({status: 'success'});
-
+  
 });
 
 // -----
