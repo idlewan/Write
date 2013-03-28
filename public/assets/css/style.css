@@ -13,12 +13,12 @@ body, html {
 	max-width: 100%;
 	overflow: hidden;
 
-	font: normal 12px/18px Menlo, Consolas, "Courier New", mono;
+	font: normal 12px/18px Menlo, Consolas, "Courier New", monospace;
 }
 
 body.dark {
 	background: #151515;
-	color: #ccc;
+	color: #aaa;
 }
 
 body.light {
@@ -27,10 +27,6 @@ body.light {
 }
 
 body {
-	-webkit-transition: all .2s ease;
-	-moz-transition: all .2s ease;
-	-ms-transition: all .2s ease;
-	-o-transition: all .2s ease;
 	transition: all .2s ease;
 }
 
@@ -50,15 +46,12 @@ Write Area
 	width: 100%;
 	padding: 50px;
 	background: transparent;
-	font: 20px/29px "Courier New", monospace;
+	font: normal 18px/25px Menlo, Consolas, "Courier New", monospace;
 	border: 0;
 	outline: 0;
 	color: inherit;
 	resize: none;
-	-webkit-transition: all .2s ease;
-	-moz-transition: all .2s ease;
-	-ms-transition: all .2s ease;
-	-o-transition: all .2s ease;
+	text-shadow: none;
 	transition: all .2s ease;
 }
 
@@ -94,10 +87,6 @@ Profile
 	opacity: 0;
 	visibility: hidden;
 	z-index: 10;
-	-webkit-transition: all 0.2s ease;
-	-moz-transition: all 0.2s ease;
-	-ms-transition: all 0.2s ease;
-	-o-transition: all 0.2s ease;
 	transition: all 0.2s ease;
 }
 
@@ -108,10 +97,6 @@ Profile
 	position: absolute;
 	left: -350px;
 	top: 0;
-	-webkit-transition: all .2s ease;
-	-moz-transition: all .2s ease;
-	-ms-transition: all .2s ease;
-	-o-transition: all .2s ease;
 	transition: all .2s ease;
 
 	box-shadow: inset -2px 0 20px rgba(0, 0, 0, 1);
@@ -139,10 +124,6 @@ Profile
 	height: 36px;
 	z-index: 5;
 	cursor: pointer;
-	-webkit-transition: all .2s ease;
-	-moz-transition: all .2s ease;
-	-ms-transition: all .2s ease;
-	-o-transition: all .2s ease;
 	transition: all .2s ease;
 }
 
