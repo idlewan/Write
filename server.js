@@ -82,10 +82,10 @@ app.get('/w/:key', function(req, res) {
 
   redis.hget('writeup:'+key, 'content', function(err, reply) {
     var data = {key: key, content: reply};
-
     res.render('home', data);
   });
-  
+
+  console.log(key);
 });
 
 // Save Writeup
@@ -99,11 +99,13 @@ app.post('/write/save', function(req, res) {
 
   var key = generateId();
   var content = req.body.content
-    , created_at = Date.now();
+    , created_at = Date.now()
+    , created_by = (req.session.username) ? req.session.username : 'guest';
 
   redis.sadd('writeup:key', key);
   redis.hset('writeup:'+key, 'content', content);
   redis.hset('writeup:'+key, 'created_at', created_at);
+  redis.hset('writeup:'+key, 'created_by', created_by);
 
   res.json({key: key});
 });

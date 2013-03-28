@@ -26,7 +26,7 @@ html(lang="en")
       p.
         This little app has been created for those who want
         to write without any distractions. Ctrl+M (or ⌘+M) for Markdown
-        Support.
+        Conversion.
 
       p
         | Source on 
@@ -38,6 +38,7 @@ html(lang="en")
       ul
         li
           a(href="/auth/twitter") Twitter
+      p
 
       h3 Preferences
 
@@ -75,7 +76,7 @@ html(lang="en")
     // User Info
     section#profile
       a(href="javascript:void(0);")
-        img(src="https://api.twitter.com/1/users/profile_image/#{username}")
+        img(src="https://api.twitter.com/1/users/profile_image/#{username}", "width=40")
 
 
     // Heart

@@ -85,7 +85,7 @@ function init() {
 			}
 		}
 
-		console.log(e.keyCode);
+		//console.log(e.keyCode);
 	}, false);
 
 	// Insert tab when "tab" is pressed
@@ -265,7 +265,7 @@ function init() {
 
 }
 
-keyz.key_bindings['ctrl+s'] = function() {
+keyz.key_bindings['ctrl+s', 'meta+s'] = function() {
 	var content = $('#text').val()
 		, url = '/write/save';
 

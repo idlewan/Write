@@ -13,17 +13,17 @@ body, html {
 	max-width: 100%;
 	overflow: hidden;
 
-	font: normal 12px/18px "Courier New", Consolas, mono;
+	font: normal 12px/18px Menlo, Consolas, "Courier New", mono;
 }
 
 body.dark {
-	background: #222;
-	color: white;
+	background: #444;
+	color: #ddd;
 }
 
 body.light {
-	background: #222;
-	color: white;
+	background: #ddd;
+	color: #444;
 }
 
 /*
@@ -32,7 +32,7 @@ Write Area
 */
 
 #write {
-	max-width: 800px;
+	width: 100%;
 	height: 100%;
 	margin: 0 auto;
 }
@@ -72,7 +72,7 @@ Profile
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 5px;
 }
  
 ::-webkit-scrollbar-track {
@@ -80,8 +80,7 @@ Profile
 }
  
 ::-webkit-scrollbar-thumb {
-    background: #555; 
-    margin: 10px;
+    background: rgba(255, 255, 255, 0.1); 
 }
 
 /* Text Styles */
@@ -106,11 +105,11 @@ Profile
 }
 
 #about {
-	width: 300px;
+	width: 350px;
 	height: 100%;
-	background: #111;
+	background: #0e0e0e;
 	position: absolute;
-	left: -300px;
+	left: -350px;
 	top: 0;
 	-webkit-transition: all .5s ease;
 	-moz-transition: all .5s ease;
@@ -121,7 +120,8 @@ Profile
 	box-shadow: inset -2px 0 20px rgba(0, 0, 0, 1);
 	overflow: auto;
 
-	padding: 25px 25px;
+	padding: 25px 25px 25px 75px;
+	text-shadow : 0 1px 1px black;
 }
 
 #toggle {display: none;}
@@ -131,8 +131,8 @@ Profile
 }
 
 .toggle:hover {	background: #111; }
-#toggle:checked ~ #about{ left: 0; }
-#toggle:checked ~ #text{ padding-left: 350px; }
+#toggle:checked ~ #about{ left: -50px; }
+#toggle:checked ~ #write > #text{ padding-left: 350px; }
 
 .toggle {
 	position: absolute;
