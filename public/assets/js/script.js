@@ -13,23 +13,35 @@ function init() {
 			fullBtn: document.getElementById("fsBtn"),
 			sound: "yes",
 			full: "no"
-		},
-		key = {
-			0: document.getElementById("one"),
-			1: document.getElementById("two"),
-			2: document.getElementById("three"),
-			3: document.getElementById("four"),
-			4: document.getElementById("five"),
-			5: document.getElementById("six")
-		},
-		enter = {
-			0: document.getElementById("enter1"),
-			1: document.getElementById("enter2"),
-			2: document.getElementById("enter3"),
-			3: document.getElementById("enter4"),
-			4: document.getElementById("enter5"),
-			5: document.getElementById("enter6")
 		};
+
+	/*
+	// Audio Init (Multi channel) -- Doesn't work anymore
+	var source_key = 'sfx/1.' + ((new Audio).canPlayType('audio/wav') ? 'wav' : 'mp3')
+		,	source_ent = 'sfx/enter.' + ((new Audio).canPlayType('audio/wav') ? 'wav' : 'mp3');
+
+	var audio_key = new Audio(source_key)
+		,	audio_ent = new Audio(source_ent);
+	
+	document.body.appendChild(audio_key);
+	document.body.appendChild(audio_ent);
+
+	var chan_key = [audio_key, audio_key, audio_key, audio_key, audio_key, audio_key]
+		, chan_ent = [audio_ent, audio_ent, audio_ent, audio_ent, audio_ent, audio_ent];
+
+	audio_key.load();
+	audio_ent.load();
+	*/
+
+	var audio_key = new buzz.sound( "/sfx/1", {
+    formats: [ "mp3", "wav" ],
+    channels: 6
+	});
+
+	var audio_ent = new buzz.sound( "/sfx/enter", {
+    formats: [ "mp3", "wav" ],
+    channels: 6
+	});
 
 	textarea.focus();
 	
@@ -40,7 +52,7 @@ function init() {
 		if(localStorage.getItem("sound") == "no") {
 			settings.sound = "no";
 			document.getElementById("muteVal").innerHTML = "no";	
-	}
+		}
 	} catch(e) {}
 
 	// Get the previous text, if any
@@ -60,30 +72,20 @@ function init() {
 	}
 
 	// Play the sound
-	textarea.addEventListener("keypress", function(e) {
+	textarea.addEventListener("keydown", function(e) {
 		if(settings.sound == "yes") {
 			keyCode = e.keyCode || e.which;
 
 			if(keyCode == 13) {
-				enter[k].volume = 0.2 + (Math.random() * 0.5);
-				enter[k].play();
-				if(k > 4)
-					k = 0;
-				else
-					k++;
-			}
-
-			else {
-				key[i].volume = 0.2 + (Math.random() * 0.5);
-				key[i].play();
-				if(i > 4)
-					i = 0;
-				else
-					i++;
-
+				audio_ent.volume = 0.2 + (Math.random() * 0.5);
+				audio_ent.play();
+			} else {
+				audio_key.volume = 0.2 + (Math.random() * 0.5);
+				audio_key.play();
 			}
 		}
-		// console.log(e.keyCode);
+
+		console.log(e.keyCode);
 	}, false);
 
 	// Insert tab when "tab" is pressed
@@ -118,7 +120,7 @@ function init() {
 		// Markdown!
 		keyCode = e.keyCode || e.which;
 
-		if(e.ctrlKey && keyCode == 77) {
+		if((e.ctrlKey || e.metaKey) && keyCode == 77) {
 			if(!isPreviewActive) {
 				preview.innerHTML  = converter.makeHtml(textarea.value);
 				preview.style.opacity = 1;
@@ -191,7 +193,7 @@ function init() {
 			\n\nHello! I created this small webapp to help people write without any distractions.\
 			\nIt does not store any of your stories/poems on the server or send them anywhere so feel free to type whatever you want.\
 			\n\nThis is the first time intro and you'll never see this again.\
-			\n\nSome Features\n------------\n\n* Markdown support. (Press CTRL+M to view the preview)\
+			\n\nSome Features\n------------\n\n* Markdown support. (Press Ctrl+M or ⌘+M to view the preview)\
 			\n* Autosave using HTML5 localStorage.\
 			\n* More features coming soon.\
 			\n\nTo start typing, just remove everything from here or refresh the page. Happy writing :)";
@@ -211,12 +213,8 @@ function init() {
 
 					if(myArray[1] != "\n") {
 						if(settings.sound == "yes") {
-							key[i].volume = 0.2 + (Math.random() * 0.2);
-							key[i].play();
-							if(i > 4)
-								i = 0;
-							else
-								i++;
+							audio_key.volume = 0.2 + (Math.random() * 0.5);
+							audio_key.play();
 						}
 
 						isStop = false;
@@ -224,12 +222,8 @@ function init() {
 
 					else {
 						if(settings.sound == "yes") {
-							enter[k].volume = 0.2 + (Math.random() * 0.5);
-							enter[k].play();
-							if(k > 4)
-								k = 0;
-							else
-								k++;
+							audio_ent.volume = 0.2 + (Math.random() * 0.5);
+							audio_ent.play();
 						}
 
 						isStop = true;
@@ -241,32 +235,32 @@ function init() {
 				if(isStop)
 					var rand = 300;
 				else
-			    	var rand = Math.round(Math.random() * (150 - 20)) + 20;
+			    var rand = Math.round(Math.random() * (150 - 20)) + 20;
 
 			    setTimeout(function() {
-		            frameLooper();
-		            loop();  
+            frameLooper();
+            loop();  
 			    }, rand);
-			}());
+			})();
 		}
 	} catch(e) {}
 
 	function requestFullScreen(element) {
-	    // Supports most browsers and their versions.
-	    var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+    // Supports most browsers and their versions.
+    var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
 
-	    if (requestMethod) { // Native full screen.
-	        requestMethod.call(element);
-	    } 
+    if (requestMethod) { // Native full screen.
+      requestMethod.call(element);
+    } 
 	}
 
 	function cancelFullScreen(element) {
-	    // Supports most browsers and their versions.
-	    var requestMethod = element.exitFullscreen || element.webkitCancelFullScreen || element.mozCancelFullScreen;
+    // Supports most browsers and their versions.
+    var requestMethod = element.exitFullscreen || element.webkitCancelFullScreen || element.mozCancelFullScreen;
 
-	    if (requestMethod) { // Native full screen.
-	        requestMethod.call(element);
-	    } 
+    if (requestMethod) { // Native full screen.
+      requestMethod.call(element);
+    } 
 	}
 
 }

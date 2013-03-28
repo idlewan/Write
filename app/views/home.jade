@@ -14,57 +14,6 @@ html(lang="en")
 
   body.dark
 
-    // Audio
-    audio#one(preload="true")
-      source(src="/sfx/1.mp3", type="audio/mpeg")
-      source(src="/sfx/1.wav", type="audio/wav")
-  
-    audio#two(preload="true")
-      source(src="/sfx/1.mp3", type="audio/mpeg")
-      source(src="/sfx/1.wav", type="audio/wav")
-
-    audio#three(preload="true")
-      source(src="/sfx/1.mp3", type="audio/mpeg")
-      source(src="/sfx/1.wav", type="audio/wav")
-
-    audio#four(preload="true")
-      source(src="/sfx/1.mp3", type="audio/mpeg")
-      source(src="/sfx/1.wav", type="audio/wav")
-
-    audio#five(preload="true")
-      source(src="/sfx/1.mp3", type="audio/mpeg")
-      source(src="/sfx/1.wav", type="audio/wav")
-
-    audio#six(preload="true")
-      source(src="/sfx/1.mp3", type="audio/mpeg")
-      source(src="/sfx/1.wav", type="audio/wav")
-
-
-    audio#enter1(preload="true")
-      source(src="/sfx/enter.mp3", type="audio/mpeg")
-      source(src="/sfx/enter.wav", type="audio/wav")
-
-    audio#enter2(preload="true")
-      source(src="/sfx/enter.mp3", type="audio/mpeg")
-      source(src="/sfx/enter.wav", type="audio/wav")
-
-    audio#enter3(preload="true")
-      source(src="/sfx/enter.mp3", type="audio/mpeg")
-      source(src="/sfx/enter.wav", type="audio/wav")
-
-    audio#enter4(preload="true")
-      source(src="/sfx/enter.mp3", type="audio/mpeg")
-      source(src="/sfx/enter.wav", type="audio/wav")
-
-    audio#enter5(preload="true")
-      source(src="/sfx/enter.mp3", type="audio/mpeg")
-      source(src="/sfx/enter.wav", type="audio/wav")
-
-    audio#enter6(preload="true")
-      source(src="/sfx/enter.mp3", type="audio/mpeg")
-      source(src="/sfx/enter.wav", type="audio/wav")
-
-
     // Settings/Info
     input#toggle(type="checkbox", name="toggle")
     label.toggle(for="toggle")
@@ -76,7 +25,7 @@ html(lang="en")
 
       p.
         This little app has been created for those who want
-        to write without any distractions. CTRL+M for Markdown
+        to write without any distractions. Ctrl+M (or ⌘+M) for Markdown
         Support.
 
       p
@@ -141,6 +90,7 @@ html(lang="en")
 
     // Scripts
     script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js")
+    script(src="/js/buzz.js")
     script(src="/js/Markdown.Converter.js")
     script(src="/js/keyz.js")
     script(src="/js/script.js")
