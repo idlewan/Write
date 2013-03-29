@@ -66,6 +66,7 @@ app.locals.username = 'Guest';
 
 app.get('/', function(req, res) {
   res.render('home');
+  // console.log(redis);
 });
 
 // Tmp Favicon Fallback

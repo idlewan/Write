@@ -22,7 +22,7 @@ body.dark {
 }
 
 body.light {
-	background: #ddd;
+	background: #ccc;
 	color: #444;
 }
 
@@ -62,7 +62,7 @@ Notifications
 
 p.notify {
 	position: absolute;
-	top: 25px;
+	top: 22px;
 	right: 60px;
 	display: none;
 }
@@ -82,16 +82,20 @@ Profile
 
 #profile {
 	position: absolute;
-	right: 10px; top: 10px;
+	right: 8px; top: 8px;
 }
 
 #profile img {
 	opacity: 0.5;
 	border-radius: 3px;
+	background: #333;
 }
+
 #profile img:hover {
 	opacity: 1;
 }
+
+.light #profile img {background: #fff;}
 
 /* Text Styles */
 #preview {
@@ -129,10 +133,12 @@ Profile
 #toggle {display: none;}
 #toggle:checked ~ .toggle{
 	left: 300px;
-	background: #111;
+	background: #000;
 }
 
-.toggle:hover {	background: #111; }
+.toggle:hover {	background: #000; }
+.light .toggle:hover {	background: #aaa; }
+
 #toggle:checked ~ #about{ left: -50px; }
 #toggle:checked ~ #write > #text{ padding-left: 350px; }
 
@@ -156,6 +162,11 @@ Profile
 	bottom: 10px;
 	left: 7px;
 	box-shadow: 0 -6px #555, 0 -12px #555;
+}
+
+.light .toggle:before {
+	background: #fff;
+	box-shadow: 0 -6px #fff, 0 -12px #fff;
 }
 
 .logo {
