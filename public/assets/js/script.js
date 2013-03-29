@@ -225,7 +225,6 @@ function init() {
 			var introText = "(Refresh to skip this intro)\n\n\nAbout\
 			\n-----\
 			\n\nHello! I created this small webapp to help people write without any distractions.\
-			\nIt does not store any of your stories/poems on the server or send them anywhere so feel free to type whatever you want.\
 			\n\nThis is the first time intro and you'll never see this again.\
 			\n\nSome Features\n------------\n\n* Markdown support. (Press Ctrl+M or ⌘+M to view the preview)\
 			\n* Autosave using HTML5 localStorage.\
