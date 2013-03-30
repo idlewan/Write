@@ -1,14 +1,14 @@
-Write
-=====
+Write App
+=========
 
-About
+Web App for Distraction-free writing created with ♥ for writers. 
+
+Features
 -----
-
-Web App for Distraction-free writing created with ♥ for writers. Here are some of the current features:
 
 - Markdown support (Press Ctrl+M or ⌘+M) for preview.
 - Dark/Light theme switching.
-- Fullscreen support
+- Fullscreen support.
 - Twitter auth for saving the writeups under your username (for later access). You can use Ctrl+S or ⌘+S to save/update your writeup on the server.
 - Saving of writeups locally.
 
